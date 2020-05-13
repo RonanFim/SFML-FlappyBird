@@ -1,21 +1,40 @@
-# Complete ex: https://stackoverflow.com/questions/20934968/mingw-static-library-linking-sfml-2-1/24575912
+# In order to link statically, it would be necessary recompile the library with cmake
+# https://www.youtube.com/watch?v=UM93glM0Fhs
 
-# FlappyBird.exe: main.o
-# 	g++ -DSFML_STATIC main.o -o FlappyBird.exe -LC:/SFML-2.5.1/lib -lsfml-system-s -lsfml-window-s -lsfml-graphics-s
+EXE_FILE = FlappyBird.exe
+PROGRAM_PATH = C:/SFML-2.5.1
+INCLUDE_DIR = $(PROGRAM_PATH)/include
+LIB_DIR = $(PROGRAM_PATH)/lib
 
-# main.o: main.cpp
-# 	g++ -DSFML_STATIC -c main.cpp -IC:/SFML-2.5.1/include
+CC = g++
+LIBS = -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -lfreetype
+DEFS = -DSFML_STATIC
 
-FlappyBird.exe: main.o
-	g++ main.o -o FlappyBird.exe -DSFML_STATIC -LC:/SFML-2.5.1/lib -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -lfreetype
+CPPFLAGS = $(DEFS) -I$(INCLUDE_DIR)
+LDFLAGS = $(DEFS) -L$(LIB_DIR) $(LIBS)
 
-main.o: main.cpp
-	g++ -c main.cpp -DSFML_STATIC -IC:/SFML-2.5.1/include
+CPPSOURCES = $(wildcard *.cpp)
 
-all: FlappyBird.exe
+all: $(EXE_FILE)
+
+$(EXE_FILE): $(CPPSOURCES:.cpp=.o)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+%.o: %.cpp
+	$(CC) -c $< $(CPPFLAGS) -o $@
 
 clear:
-	rm "FlappyBird.exe" "main.o"
+	rm -f *.o *.d
 
-clean:
-	rm "main.o"
+clearall:
+	$(MAKE) clear
+	rm -f "$(EXE_FILE)"
+
+remade:
+	$(MAKE) clearall
+	$(MAKE)
+
+-include $(CPPSOURCES:.cpp=.d)
+
+%.d: %.cpp
+	$(CC) $< -MM -MT '$*.o $*.d' -MD $(CPPFLAGS)
