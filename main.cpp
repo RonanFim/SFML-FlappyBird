@@ -1,17 +1,21 @@
 #include "SFML/Graphics.hpp"
 
-#define SCREEN_WIDTH    480
-#define SCREEN_HEIGHT   480
+#include "definitions.h"
+#include "States/StateMachine.h"
+#include "States/Splash.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SFML Test");
+    StateMachine sm;
+    sm.addState(StateRef(new Splash()));
+    sm.processChanges();
 
-    sf::CircleShape cShape(100.f);
-    cShape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Flappy Bird");
 
     while(window.isOpen())
     {
+        sm.activeState()->process();
+
         sf::Event event;
         while(window.pollEvent(event))
         {
@@ -20,8 +24,9 @@ int main()
         }
 
         window.clear();
-        window.draw(cShape);
         window.display();
+        
+        sm.processChanges();
     }
 
     return 0;
