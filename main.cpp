@@ -1,32 +1,33 @@
 #include "SFML/Graphics.hpp"
 
 #include "definitions.h"
-#include "States/StateMachine.h"
+#include "GameData.h"
 #include "States/Splash.h"
 
 int main()
 {
-    StateMachine sm;
-    sm.addState(StateRef(new Splash()));
-    sm.processChanges();
+    GameDataRef game = std::make_shared<GameData>();
+    game->sm.addState(StateRef(new Splash(game)));
+    game->sm.processChanges();
 
-    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Flappy Bird");
+    game->window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Flappy Bird",
+                        sf::Style::Close | sf::Style::Titlebar);
 
-    while(window.isOpen())
+    while(game->window.isOpen())
     {
-        sm.activeState()->process();
+        game->sm.activeState()->process();
 
         sf::Event event;
-        while(window.pollEvent(event))
+        while(game->window.pollEvent(event))
         {
             if(event.type == sf::Event::Closed)
-                window.close();
+                game->window.close();
         }
 
-        window.clear();
-        window.display();
+        game->window.clear();
+        game->window.display();
         
-        sm.processChanges();
+        game->sm.processChanges();
     }
 
     return 0;
