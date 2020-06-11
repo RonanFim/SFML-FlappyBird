@@ -3,8 +3,8 @@
 void StateMachine::addState(StateRef newState, bool isReplacing /* = false */ )
 {
     _isReplacing = isReplacing;
-    _newState = newState;
     _stateChanged = true;
+    _newState = std::move(newState);
 }
 
 StateRef StateMachine::activeState()
@@ -26,7 +26,9 @@ bool StateMachine::processChanges()
     if(_isReplacing && !machine.empty())
         machine.pop();
     
-    machine.push(_newState);
+    machine.push(std::move(_newState));
+    machine.top()->Init();
+    _stateChanged = false;
 
     return true;
 }

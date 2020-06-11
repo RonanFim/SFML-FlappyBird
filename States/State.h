@@ -4,8 +4,10 @@
 class State
 {
 public:
-    virtual void init() = 0;
-    virtual void process() = 0;
+    virtual void Init() = 0;
+    virtual void Update() = 0;
+    virtual void HandleInput() = 0;
+    virtual void Draw() = 0;
 };
 
 #endif

@@ -13,21 +13,31 @@ int main()
     game->window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Flappy Bird",
                         sf::Style::Close | sf::Style::Titlebar);
 
+    sf::Clock clock;
+    unsigned int newTime;
+    unsigned int currentTime = clock.getElapsedTime().asMilliseconds();
+    unsigned int acc = 0;
+
+    const unsigned int dt = 20; // 20ms
+
     while(game->window.isOpen())
     {
-        game->sm.activeState()->process();
+        game->sm.processChanges();
 
-        sf::Event event;
-        while(game->window.pollEvent(event))
+        newTime = clock.getElapsedTime().asMilliseconds();
+
+        acc += (newTime - currentTime);
+        currentTime = newTime;
+
+        while(acc > dt)
         {
-            if(event.type == sf::Event::Closed)
-                game->window.close();
+            game->sm.activeState()->HandleInput();
+            game->sm.activeState()->Update();
+
+            acc -= dt;
         }
 
-        game->window.clear();
-        game->window.display();
-        
-        game->sm.processChanges();
+        game->sm.activeState()->Draw();
     }
 
     return 0;
