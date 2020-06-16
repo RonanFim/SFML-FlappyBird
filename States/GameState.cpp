@@ -8,6 +8,11 @@ void GameState::Init()
 {
     _game->asset.LoadTexture("Game Background", GAME_BACKGROUND_FILE);
     _background.setTexture(_game->asset.GetTexture("Game Background"));
+
+    _game->asset.LoadTexture("Game Land", GAME_LAND_FILE);
+    _land.setTexture(_game->asset.GetTexture("Game Land"));
+
+    _land.setPosition(0, _game->window.getSize().y - _land.getGlobalBounds().height);
 }
 
 void GameState::HandleInput()
@@ -29,5 +34,6 @@ void GameState::Draw()
 {
     _game->window.clear();
     _game->window.draw(_background);
+    _game->window.draw(_land);
     _game->window.display();
 }

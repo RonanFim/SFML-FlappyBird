@@ -18,6 +18,7 @@ public:
 private:
     GameDataRef _game;
     sf::Sprite _background;
+    sf::Sprite _land;
 };
 
 #endif

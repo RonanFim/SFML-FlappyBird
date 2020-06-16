@@ -14,6 +14,10 @@
 #define PLAY_BUTTON_FILE        "Resources/PlayButton.png"
 #define MENU_TITLE_FILE         "Resources/title.png"
 
+#define GAME_LAND_FILE          "Resources/land.png"
+#define PIPE_UP_FILE            "Resources/PipeUp.png"
+#define PIPE_DOWN_FILE          "Resources/PipeDown.png"
+
 #define GAMEOVER_TITLE_FILE     "Resources/Game-Over-Title.png"
 #define GAMEOVER_BODY_FILE      "Resources/Game-Over-Body.png"
 

@@ -17,8 +17,10 @@ void Menu::Init()
     _game->asset.LoadTexture("Menu Title", MENU_TITLE_FILE);
     _title.setTexture(_game->asset.GetTexture("Menu Title"));
 
-    _playButton.setPosition(SCREEN_WIDTH/2 - _playButton.getGlobalBounds().width/2, SCREEN_HEIGHT/2);
-    _title.setPosition(SCREEN_WIDTH/2 - _title.getGlobalBounds().width/2, SCREEN_HEIGHT/8);
+    _playButton.setPosition(_game->window.getSize().x/2 - _playButton.getGlobalBounds().width/2,
+                            _game->window.getSize().y/2);
+    _title.setPosition(_game->window.getSize().x/2 - _title.getGlobalBounds().width/2,
+                       _game->window.getSize().y/8);
 }
 
 void Menu::HandleInput()
