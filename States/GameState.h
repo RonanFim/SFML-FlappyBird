@@ -1,15 +1,15 @@
-#ifndef _STATES_MENU_H_
-#define _STATES_MENU_H_
+#ifndef _STATES_GAMESTATE_H_
+#define _STATES_GAMESTATE_H_
 
 #include "SFML/Graphics.hpp"
 
 #include "State.h"
 #include "../GameData.h"
 
-class Menu : public State
+class GameState : public State
 {
 public:
-    Menu(GameDataRef game);
+    GameState(GameDataRef game);
     void Init();
     void Update();
     void HandleInput();
@@ -18,8 +18,6 @@ public:
 private:
     GameDataRef _game;
     sf::Sprite _background;
-    sf::Sprite _playButton;
-    sf::Sprite _title;
 };
 
 #endif

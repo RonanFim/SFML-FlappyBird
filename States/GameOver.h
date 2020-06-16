@@ -1,15 +1,15 @@
-#ifndef _STATES_MENU_H_
-#define _STATES_MENU_H_
+#ifndef _STATES_GAMEOVER_H_
+#define _STATES_GAMEOVER_H_
 
 #include "SFML/Graphics.hpp"
 
 #include "State.h"
 #include "../GameData.h"
 
-class Menu : public State
+class GameOver : public State
 {
 public:
-    Menu(GameDataRef game);
+    GameOver(GameDataRef game);
     void Init();
     void Update();
     void HandleInput();
@@ -18,7 +18,7 @@ public:
 private:
     GameDataRef _game;
     sf::Sprite _background;
-    sf::Sprite _playButton;
+    sf::Sprite _body;
     sf::Sprite _title;
 };
 

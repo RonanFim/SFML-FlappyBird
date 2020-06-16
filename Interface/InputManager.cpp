@@ -1,6 +1,6 @@
 #include "InputManager.h"
 
-bool IsSpriteClicked(sf::Sprite sprite, sf::Mouse::Button button, sf::RenderWindow & window)
+bool InputManager::IsSpriteClicked(sf::Sprite sprite, sf::Mouse::Button button, sf::RenderWindow & window)
 {
     if(!sf::Mouse::isButtonPressed(button))
         return false;
@@ -11,7 +11,7 @@ bool IsSpriteClicked(sf::Sprite sprite, sf::Mouse::Button button, sf::RenderWind
     return rect.contains(sf::Mouse::getPosition(window));
 }
 
-sf::Vector2i GetMousePosition(sf::RenderWindow & window)
+sf::Vector2i InputManager::GetMousePosition(sf::RenderWindow & window)
 {
     return sf::Mouse::getPosition(window);
 }
