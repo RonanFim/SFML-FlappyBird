@@ -5,6 +5,7 @@
 
 #include "State.h"
 #include "../GameData.h"
+#include "../Elements/Pipes.h"
 
 class GameState : public State
 {
@@ -19,6 +20,7 @@ private:
     GameDataRef _game;
     sf::Sprite _background;
     sf::Sprite _land;
+    PipesRef _pipes;
 };
 
 #endif
