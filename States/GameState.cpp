@@ -19,15 +19,7 @@ void GameState::Init()
     _game->asset.LoadTexture("Pipe Up", PIPE_UP_FILE);
     _game->asset.LoadTexture("Pipe Down", PIPE_DOWN_FILE);
 
-    sf::Sprite up, down;
-    up.setTexture(_game->asset.GetTexture("Pipe Up"));
-    down.setTexture(_game->asset.GetTexture("Pipe Down"));
-
-    up.setPosition(_game->window.getSize().x, 0);
-    down.setPosition(_game->window.getSize().x,
-                     _game->window.getSize().y - down.getGlobalBounds().height);
-    _pipes->AddPipe(up);
-    _pipes->AddPipe(down);
+    //_pipes.CreatePipes();
 
     _land.setPosition(0, _game->window.getSize().y - _land.getGlobalBounds().height);
 }

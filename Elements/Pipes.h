@@ -15,10 +15,12 @@ public:
     bool RemovePipe(unsigned int pos = 0);
     sf::Sprite & Get(unsigned int pos);
     void Update();
+    void CreatePipes();
 
 private:
     std::vector<sf::Sprite> _pipes;
     GameDataRef _game;
+    unsigned int _frames_acc;
 };
 
 typedef std::unique_ptr<Pipes> PipesRef;
