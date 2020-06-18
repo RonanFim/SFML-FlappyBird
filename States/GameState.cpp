@@ -4,24 +4,19 @@
 #include <iostream>
 
 GameState::GameState(GameDataRef game) : _game(game)
-{
-    _pipes = std::move(std::make_unique<Pipes>(game));
-}
+{ }
 
 void GameState::Init()
 {
     _game->asset.LoadTexture("Game Background", GAME_BACKGROUND_FILE);
-    _background.setTexture(_game->asset.GetTexture("Game Background"));
-
     _game->asset.LoadTexture("Game Land", GAME_LAND_FILE);
-    _land.setTexture(_game->asset.GetTexture("Game Land"));
-
     _game->asset.LoadTexture("Pipe Up", PIPE_UP_FILE);
     _game->asset.LoadTexture("Pipe Down", PIPE_DOWN_FILE);
 
-    //_pipes.CreatePipes();
+    _background.setTexture(_game->asset.GetTexture("Game Background"));
 
-    _land.setPosition(0, _game->window.getSize().y - _land.getGlobalBounds().height);
+    _land = new Land(_game);
+    _pipes = new Pipes(_game);
 }
 
 void GameState::HandleInput()
@@ -37,6 +32,7 @@ void GameState::HandleInput()
 void GameState::Update()
 {
     _pipes->Update();
+    _land->Move();
     //std::cout << "Hello GameState " << PIPES_SPEED << std::endl;
 }
 
@@ -44,7 +40,7 @@ void GameState::Draw()
 {
     _game->window.clear();
     _game->window.draw(_background);
-    _pipes->DrawPipes();
-    _game->window.draw(_land);
+    _pipes->Draw();
+    _land->Draw();
     _game->window.display();
 }

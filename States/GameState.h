@@ -6,6 +6,7 @@
 #include "State.h"
 #include "../GameData.h"
 #include "../Elements/Pipes.h"
+#include "../Elements/Land.h"
 
 class GameState : public State
 {
@@ -18,9 +19,9 @@ public:
 
 private:
     GameDataRef _game;
-    sf::Sprite _background;
-    sf::Sprite _land;
-    PipesRef _pipes;
+    sf::Sprite  _background;
+    Land*       _land;
+    Pipes*      _pipes;
 };
 
 #endif
