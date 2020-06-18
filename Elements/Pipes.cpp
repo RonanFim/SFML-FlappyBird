@@ -5,6 +5,7 @@
 Pipes::Pipes(GameDataRef game) : _game(game)
 {
     _frames_acc = 0;
+    _land_height = _game->asset.GetTexture("Game Land").getSize().y;
 }
 
 void Pipes::Draw()
@@ -19,9 +20,10 @@ void Pipes::Spawn()
     up.setTexture(_game->asset.GetTexture("Pipe Up"));
     down.setTexture(_game->asset.GetTexture("Pipe Down"));
 
-    up.setPosition(_game->window.getSize().x, 0);
+    int randomYoffset = rand() % (_land_height);
+    up.setPosition(_game->window.getSize().x, (0 - randomYoffset));
     down.setPosition(_game->window.getSize().x,
-                     _game->window.getSize().y - down.getGlobalBounds().height);
+                     _game->window.getSize().y - down.getGlobalBounds().height - randomYoffset);
 
     _pipes.push_back(up);
     _pipes.push_back(down);

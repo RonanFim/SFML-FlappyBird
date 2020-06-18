@@ -17,6 +17,7 @@ private:
     std::vector<sf::Sprite> _pipes;
     GameDataRef _game;
     unsigned int _frames_acc;
+    unsigned int _land_height;
 };
 
 #endif
