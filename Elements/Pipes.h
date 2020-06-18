@@ -14,6 +14,7 @@ public:
     void AddPipe(sf::Sprite pipe);
     bool RemovePipe(unsigned int pos = 0);
     sf::Sprite & Get(unsigned int pos);
+    void Update();
 
 private:
     std::vector<sf::Sprite> _pipes;

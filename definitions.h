@@ -1,8 +1,14 @@
 #ifndef _DEFINITIONS_H_
 #define _DEFINITIONS_H_
 
+
 #define SCREEN_WIDTH    384
 #define SCREEN_HEIGHT   512
+
+#define FRAMES_PER_SECOND       50
+#define MILISECONDS_PER_FRAME   (1000 / FRAMES_PER_SECOND)
+#define PIPES_PIXELS_PER_MS     (SCREEN_WIDTH / 2000.0)         // A tela toda em 2000ms
+#define PIPES_SPEED             int(PIPES_PIXELS_PER_MS * MILISECONDS_PER_FRAME)   // Pixels to move per frame
 
 #define SPLASH_STATE_TIME   3.0     // Seconds
 

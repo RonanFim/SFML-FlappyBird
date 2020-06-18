@@ -1,6 +1,8 @@
 #include "GameState.h"
 #include "../definitions.h"
 
+#include <iostream>
+
 GameState::GameState(GameDataRef game) : _game(game)
 {
     _pipes = std::move(std::make_unique<Pipes>(game));
@@ -22,8 +24,8 @@ void GameState::Init()
     down.setTexture(_game->asset.GetTexture("Pipe Down"));
 
     up.setPosition(_game->window.getSize().x, 0);
-    down.setPosition(_game->window.getSize().x, _game->window.getSize().y
-                        - _land.getGlobalBounds().height - down.getGlobalBounds().height);
+    down.setPosition(_game->window.getSize().x,
+                     _game->window.getSize().y - down.getGlobalBounds().height);
     _pipes->AddPipe(up);
     _pipes->AddPipe(down);
 
@@ -42,7 +44,8 @@ void GameState::HandleInput()
 
 void GameState::Update()
 {
-    // std::cout << "Hello GameState" << std::endl;
+    _pipes->Update();
+    //std::cout << "Hello GameState " << PIPES_SPEED << std::endl;
 }
 
 void GameState::Draw()

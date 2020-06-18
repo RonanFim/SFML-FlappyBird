@@ -18,7 +18,7 @@ int main()
     unsigned int currentTime = clock.getElapsedTime().asMilliseconds();
     unsigned int acc = 0;
 
-    const unsigned int dt = 20; // 20ms
+    const unsigned int dt = MILISECONDS_PER_FRAME; // 20ms
 
     while(game->window.isOpen())
     {

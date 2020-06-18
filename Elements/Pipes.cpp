@@ -1,4 +1,5 @@
 #include "Pipes.h"
+#include "../definitions.h"
 
 Pipes::Pipes(GameDataRef game) : _game(game)
 { }
@@ -29,4 +30,10 @@ sf::Sprite & Pipes::Get(unsigned int pos)
         pos = 0;
 
     return _pipes.at(pos);
+}
+
+void Pipes::Update()
+{
+    for(unsigned int i = 0; i < _pipes.size(); i++)
+        _pipes.at(i).move(-PIPES_SPEED, 0);
 }
