@@ -11,13 +11,23 @@
 # make remake	: Clear all and recompile
 #
 
+ifeq ($(OS),Windows_NT)
 EXE_FILE = FlappyBird.exe
 SFML_PATH = C:/SFML-2.5.1
+else
+EXE_FILE = FlappyBird.out
+SFML_PATH = /home/ronan/SFML-2.5.1
+endif
+
 INCLUDE_DIR = $(SFML_PATH)/include
 LIB_DIR = $(SFML_PATH)/lib
 
 CC = g++
+ifeq ($(OS),Windows_NT)
 LIBS = -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -lfreetype
+else
+LIBS = -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lGL -lglut -lX11 -lXrandr -ludev -lfreetype -lpthread
+endif
 DEFS = -DSFML_STATIC
 
 CPPFLAGS = $(DEFS) -I$(INCLUDE_DIR)
